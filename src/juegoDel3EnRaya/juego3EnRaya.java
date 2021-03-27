@@ -53,10 +53,73 @@ public class juego3EnRaya {
 				//mientras no sea correcto no salgo
 			}while (!correcto);
 			
+			//depende del turno, inserta un simbolo u otro
+			if(turno) {
+				insertarEn(tablero, fila, columna, J1);
+			}else {
+				insertarEn(tablero, fila, columna, J2);
+			}
+			//cambio de turno
+			turno = !turno;
 				
 			
 		}
+		//muestra el tablero
+		mostrarMatriz(tablero);
+		//mostrar el ganador
+		mostrarGanador(tablero, J1, J2, vacio);
 		
 	}
+	/*
+	 * param matriz
+	 * param J1
+	 * param J2
+	 * param simDef
+	 * */
+	public static void mostrarGanador(char[][]matriz, char J1, char J2, char simDef) {
+		char simbolo = coincidenciaLinea(matriz, simDef);
+		if(simbolo! = simDef) {
+			ganador(simbolo, J1, J2, 1);
+			
+			return;
+			}
+		simbolo = coincidenciaColumna(matriz, simDef);
+		if(simbolo != simDef) {
+			ganador(simbolo, J1, J2, 2);
+			return;
+			}
+		simbolo = coincidenciaDiagonal(matriz, simDef);
+		if(simbolo != simDef) {
+			ganador(simbolo, J1, J2, 3);
+			return;
+			}
+		System.out.println("Hay un empate");
+		}
+	/*
+	 * funcion auxiliar de la anterior funcion
+	 * @param simbolo
+	 * @param J1
+	 * @param J2
+	 * @param tipo
+	 * */
+	public static void ganador(char simbolo, char J1, char J2, int tipo) {
+		switch(tipo) {
+		case 1:
+			if(simbolo == J1) {
+				System.out.println("Ha ganado el jugador 1 por linea");
+			}else {
+				System.out.println("Ha ganado el jugador 2 por linea");
+			}
+			break;
+		case 2:
+			if(simbolo == J1) {
+				System.out.println("Ha ganado el jugador 1 por columna");
+			}else {
+				System.out.println("Ha ganado el jugador 2 por columna");
+			}
+		}
+	}
+	}
+	
 
 }
